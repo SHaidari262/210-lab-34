@@ -83,17 +83,34 @@ public:
 };
 
 int main() {
-    Graph graph(7);
+  
+    // Step 2: Modified graph
+    // Removed original vertices 5 and 6
+    // Added six new vertices, numbered 5 through 10
+    // Changed edge weights
 
-    graph.addEdge(0, 1, 12);
-    graph.addEdge(0, 2, 8);
-    graph.addEdge(0, 3, 21);
-    graph.addEdge(2, 3, 6);
-    graph.addEdge(2, 6, 2);
-    graph.addEdge(2, 4, 4);
-    graph.addEdge(2, 5, 5);
-    graph.addEdge(4, 5, 9);
-    graph.addEdge(5, 6, 6);
+    Graph graph(11);
+
+    // Connections between remaining original vertices
+    graph.addEdge(0, 1, 8);
+    graph.addEdge(0, 2, 15);
+    graph.addEdge(1, 3, 10);
+    graph.addEdge(1, 2, 6);
+    graph.addEdge(2, 3, 4);
+    graph.addEdge(3, 4, 9);
+
+    // Connections for six new vertices
+    graph.addEdge(1, 5, 5);
+    graph.addEdge(2, 6, 7);
+    graph.addEdge(3, 7, 12);
+    graph.addEdge(4, 8, 3);
+    graph.addEdge(5, 9, 6);
+    graph.addEdge(6, 10, 8);
+
+    // Additional connections
+    graph.addEdge(7, 8, 4);
+    graph.addEdge(8, 9, 7);
+    graph.addEdge(9, 10, 5);
 
     graph.display();
     graph.DFS(0);
@@ -101,3 +118,4 @@ int main() {
 
     return 0;
 }
+
