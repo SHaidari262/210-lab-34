@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <climits>
 using namespace std;
 
 class Graph {
@@ -43,6 +44,7 @@ public:
         }
     }
 
+    // Step 1: Depth First Search
     void DFS(int start) {
         vector<bool> visited(adj.size(), false);
 
@@ -53,6 +55,7 @@ public:
         cout << endl;
     }
 
+    // Step 1: Breadth First Search
     void BFS(int start) {
         vector<bool> visited(adj.size(), false);
         queue<int> q;
@@ -80,11 +83,60 @@ public:
         }
         cout << endl;
     }
+
+    // Step 4: Dijkstra's shortest path algorithm
+    void dijkstra(int start) {
+        int n = adj.size();
+        vector<int> dist(n, INT_MAX);
+        vector<bool> visited(n, false);
+
+        dist[start] = 0;
+
+        for (int i = 0; i < n; i++) {
+            int u = -1;
+
+            for (int j = 0; j < n; j++) {
+                if (!visited[j] &&
+                    (u == -1 || dist[j] < dist[u])) {
+                    u = j;
+                }
+            }
+
+            if (u == -1 || dist[u] == INT_MAX) {
+                break;
+            }
+
+            visited[u] = true;
+
+            for (auto edge : adj[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+
+                if (dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                }
+            }
+        }
+
+        cout << "\nShortest network delays from computer "
+             << start << ":\n";
+
+        for (int i = 0; i < n; i++) {
+            cout << "Computer " << i << ": ";
+
+            if (dist[i] == INT_MAX) {
+                cout << "Unreachable";
+            } else {
+                cout << dist[i] << " ms";
+            }
+
+            cout << endl;
+        }
+    }
 };
 
- int main() {
+int main() {
     // Step 3: Computer Network Simulation
-
     cout << "Computer Network Simulation\n";
     cout << "Vertices represent computers and routers.\n";
     cout << "Edges represent network connections.\n";
@@ -113,10 +165,15 @@ public:
     graph.addEdge(8, 9, 7);
     graph.addEdge(9, 10, 5);
 
+    // Display graph
     graph.display();
+
+    // Step 1: DFS and BFS
     graph.DFS(0);
     graph.BFS(0);
 
+    // Step 4: Shortest paths
+    graph.dijkstra(0);
+
     return 0;
 }
-
