@@ -82,12 +82,13 @@ public:
     }
 };
 
-int main() {
-  
-    // Step 2: Modified graph
-    // Removed original vertices 5 and 6
-    // Added six new vertices, numbered 5 through 10
-    // Changed edge weights
+ int main() {
+    // Step 3: Computer Network Simulation
+
+    cout << "Computer Network Simulation\n";
+    cout << "Vertices represent computers and routers.\n";
+    cout << "Edges represent network connections.\n";
+    cout << "Weights represent delays in milliseconds.\n\n";
 
     Graph graph(11);
 
